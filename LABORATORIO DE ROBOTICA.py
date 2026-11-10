@@ -13,7 +13,7 @@ def registrar_componente(inventario):
     comp_id = input("Ingrese el ID único del componente: ").strip()
     
     while validar_id_unico(comp_id, inventario):
-        print(f"  ❌ ERROR: El ID '{comp_id}' ya existe. Ingrese un ID diferente.")
+        print(f" ERROR: El ID '{comp_id}' ya existe. Ingrese un ID diferente.")
         comp_id = input("  Ingrese el ID único del componente: ").strip()
         
     nombre = input("Ingrese el nombre del componente: ").strip().capitalize()
@@ -24,13 +24,13 @@ def registrar_componente(inventario):
     # Validación de stock (entero >= 0)
     stock = int(input("Ingrese la cantidad inicial en stock: "))
     while stock < 0:
-        print("  ❌ ERROR: El stock no puede ser negativo.")
+        print(" ERROR: El stock no puede ser negativo.")
         stock = int(input("  Ingrese la cantidad inicial en stock: "))
         
     # Validación de precio unitario (flotante > 0)
     precio = float(input("Ingrese el precio unitario: "))
     while precio <= 0:
-        print("  ❌ ERROR: El precio debe ser mayor a 0.")
+        print(" ERROR: El precio debe ser mayor a 0.")
         precio = float(input("  Ingrese el precio unitario: "))
         
     nuevo_componente = {
@@ -42,14 +42,14 @@ def registrar_componente(inventario):
     }
     
     inventario.append(nuevo_componente)
-    print(f"\n  ✅ Componente '{nombre}' (ID: {comp_id}) registrado con éxito.")
+    print(f"\n   Componente '{nombre}' (ID: {comp_id}) registrado con éxito.")
 
 
 def consultar_y_filtrar(inventario):
     """Muestra el inventario completo o filtrado por categoría."""
     print("\n--- 2. CONSULTAR Y FILTRAR INVENTARIO ---")
     if len(inventario) == 0:
-        print("  ⚠️ El inventario está vacío.")
+        print("  El inventario está vacío.")
         return
         
     print("1) Mostrar TODOS los componentes")
@@ -66,11 +66,11 @@ def consultar_y_filtrar(inventario):
             if comp["categoria"] == cat_buscar:
                 lista_mostrar.append(comp)
     else:
-        print("  ❌ Opción no válida.")
+        print("  Opción no válida.")
         return
 
     if len(lista_mostrar) == 0:
-        print("  ⚠️ No se encontraron componentes para esa consulta.")
+        print("  No se encontraron componentes para esa consulta.")
     else:
         print("\n" + "=" * 75)
         print(f"{'ID':<10} | {'Nombre':<20} | {'Categoría':<18} | {'Stock':<8} | {'Precio ($)':<10}")
@@ -84,7 +84,7 @@ def actualizar_stock(inventario):
     """Busca un componente por su ID y suma o resta unidades del stock."""
     print("\n--- 3. ACTUALIZAR STOCK DE COMPONENTE ---")
     if len(inventario) == 0:
-        print("  ⚠️ El inventario está vacío.")
+        print("  El inventario está vacío.")
         return
         
     id_buscar = input("Ingrese el ID del componente a actualizar: ").strip()
@@ -96,7 +96,7 @@ def actualizar_stock(inventario):
             break
             
     if componente_encontrado is None:
-        print(f"  ❌ No se encontró ningún componente con el ID '{id_buscar}'.")
+        print(f"  No se encontró ningún componente con el ID '{id_buscar}'.")
     else:
         print(f"\nComponente: {componente_encontrado['nombre']} | Stock actual: {componente_encontrado['stock']}")
         print("1) Sumar stock")
@@ -106,24 +106,24 @@ def actualizar_stock(inventario):
         if tipo_operacion == "1":
             cantidad = int(input("Cantidad a agregar: "))
             while cantidad <= 0:
-                print("  ❌ Debe ingresar una cantidad mayor a 0.")
+                print("  Debe ingresar una cantidad mayor a 0.")
                 cantidad = int(input("Cantidad a agregar: "))
             componente_encontrado["stock"] += cantidad
-            print(f"  ✅ Stock actualizado. Nuevo stock: {componente_encontrado['stock']}")
+            print(f" Stock actualizado. Nuevo stock: {componente_encontrado['stock']}")
             
         elif tipo_operacion == "2":
             cantidad = int(input("Cantidad a retirar: "))
             while cantidad <= 0:
-                print("  ❌ Debe ingresar una cantidad mayor a 0.")
+                print("  Debe ingresar una cantidad mayor a 0.")
                 cantidad = int(input("Cantidad a retirar: "))
                 
             if cantidad > componente_encontrado["stock"]:
-                print(f"  ❌ ERROR: Stock insuficiente. Solo hay {componente_encontrado['stock']} unidades disponibles.")
+                print(f"  ERROR: Stock insuficiente. Solo hay {componente_encontrado['stock']} unidades disponibles.")
             else:
                 componente_encontrado["stock"] -= cantidad
-                print(f"  ✅ Stock actualizado. Nuevo stock: {componente_encontrado['stock']}")
+                print(f"  Stock actualizado. Nuevo stock: {componente_encontrado['stock']}")
         else:
-            print("  ❌ Opción inválida.")
+            print("  Opción inválida.")
 
 
 def menu_principal():
@@ -149,9 +149,9 @@ def menu_principal():
         elif opcion == "3":
             actualizar_stock(inventario)
         elif opcion == "4":
-            print("\n  👋 Saliendo del sistema de inventario. ¡Éxitos!")
+            print("\n  Saliendo del sistema de inventario. ¡Éxitos!")
         else:
-            print("  ❌ Opción no válida. Por favor elija un número del 1 al 4.")
+            print("  Opción no válida. Por favor elija un número del 1 al 4.")
 
 
 if __name__ == "__main__":
